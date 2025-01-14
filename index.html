@@ -59,7 +59,7 @@
       justify-content: center;
     }
 
-    /* Logo & Title remain same dimensions/font */
+    /* Logo & Title remain same dimensions/font on desktop */
     header img {
       height: 150px;
       width: 150px;
@@ -125,7 +125,6 @@
     }
 
     .portal-container {
-      /* Force a 16:9 ratio and wide enough to show half form / half image */
       aspect-ratio: 16 / 9;
       width: 80%;
       max-width: 800px;
@@ -140,7 +139,6 @@
       padding: 1rem; /* internal spacing if needed */
     }
 
-    /* Left half for the text/form */
     .portal-left {
       width: 50%;
       display: flex;
@@ -148,24 +146,21 @@
       align-items: center;
       justify-content: center;
       position: relative;
-      height: 100%; /* fill tile height */
+      height: 100%;
     }
-
     .portal-left h2 {
       margin-bottom: 1rem;
       font-size: 1.5rem;
       text-align: center;
-      margin-top: -0.5rem; /* shift up ~25% from original */
+      margin-top: -0.5rem;
     }
-
     .portal-form {
       display: flex;
       flex-direction: column;
-      gap: 1rem; /* space between password & log in button */
-      width: 220px; /* narrower or tweak as you prefer */
+      gap: 1rem;
+      width: 220px;
       text-align: left;
     }
-
     .portal-form label {
       font-weight: 600;
     }
@@ -175,21 +170,18 @@
       border-radius: 4px;
       width: 100%;
     }
-
     .portal-form .btn {
-      margin-top: 0.5rem; /* push the button lower if you like */
+      margin-top: 0.5rem;
       align-self: center;
     }
-
     .error-message {
       color: red;
       font-size: 0.875rem;
-      margin-top: 1rem; /* single line space */
+      margin-top: 1rem;
       display: none;
       text-align: center;
     }
 
-    /* Right half: image as a large square */
     .portal-right {
       width: 50%;
       height: 100%;
@@ -198,28 +190,11 @@
       justify-content: center;
       align-items: center;
     }
-    /* the image itself forced to a square that nearly fills half the tile */
     .portal-right img {
       width: 90%;
       height: 90%;
       object-fit: cover;
       border-radius: 8px;
-      /* so it's square => whichever dimension is smaller is the limiting factor */
-    }
-
-    /* ========== Buttons: Standard .btn Style ========== */
-    .btn {
-      background-color: #0066cc;
-      color: #fff;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .btn:hover {
-      background-color: #005bb5;
     }
 
     /* ========== Footer remains as is, 33% smaller & 12px ========== */
@@ -232,6 +207,9 @@
       justify-content: space-between;
       padding: 0.66rem;
       font-size: 12px;
+      /* Ensures no horizontal overflow on mobile */
+      width: 100%;
+      box-sizing: border-box;
     }
     footer .footer-content {
       flex: 1;
@@ -242,6 +220,47 @@
       height: 80px;
       width: 80px;
       object-fit: contain;
+    }
+
+    /* ========== Mobile Overrides ========== */
+    @media (max-width: 768px) {
+      /* Ensure no horizontal scroll on mobile overall */
+      html, body {
+        overflow-x: hidden;
+      }
+
+      /* Header scaling down, but keep same logo & no cut-off. 
+         Make text smaller to fit on one line. */
+      header {
+        padding: 0.4rem;
+        width: 100%;
+      }
+      header h1 {
+        font-size: 1.2rem; /* smaller so it doesn't break lines */
+        white-space: nowrap; /* keep text in one line if possible */
+      }
+
+      /* Hide the image portion entirely on mobile */
+      .portal-right img {
+        display: none;
+      }
+      .portal-right {
+        display: none; /* remove the entire image wrapper on mobile */
+      }
+
+      /* Let portal-left fill entire tile on mobile, remove aspect ratio if needed */
+      .portal-container {
+        aspect-ratio: auto;
+        width: 95%;
+        flex-direction: column;
+        padding: 1rem;
+        height: auto;
+      }
+
+      .portal-left h2 {
+        font-size: 1.2rem; 
+        margin-top: 0; /* remove negative margin so no overlap */
+      }
     }
   </style>
 </head>
@@ -260,13 +279,12 @@
   <nav>
     <ul>
       <li><a href="#home" class="nav-link" data-target="home" onclick="goTop()">Home</a></li>
-      <!-- All other tabs removed -->
     </ul>
   </nav>
 
   <!-- Main Content -->
   <main>
-    <!-- HOME (Active) -->
+    <!-- Home Section -->
     <section id="home" class="active">
       <div class="portal-container">
         <!-- Left half: Portal Text & Form -->
@@ -286,7 +304,7 @@
           <p id="error-message" class="error-message"></p>
         </div>
 
-        <!-- Right half: Larger Square Image -->
+        <!-- Right half: Larger Square Image (hidden on mobile) -->
         <div class="portal-right">
           <img
             src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
@@ -301,7 +319,6 @@
   <footer>
     <div class="footer-content">
       <p>360 Central Ave, Suite 800, St Petersburg FL, 33701</p>
-      <!-- Removed phone number line -->
       <p>&copy; 2025 Lighthouse Development Partners</p>
     </div>
     <img 
