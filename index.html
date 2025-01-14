@@ -46,7 +46,7 @@
       text-decoration: underline;
     }
 
-    /* ========== Header (60% as tall; same size logo/title on desktop) ========== */
+    /* ========== Header (60% as tall) for Desktop ========== */
     header {
       background: linear-gradient(
         to bottom,
@@ -54,11 +54,11 @@
         rgba(0, 31, 77, 0.8) 80%
       );
       color: white;
-      /* from 1rem => 0.6rem is ~60% the original height */
-      padding: 0.6rem;
+      padding: 0.6rem; /* about 60% the original ~1rem */
       text-align: center;
     }
 
+    /* Desktop Logo & Title */
     header img {
       height: 150px;
       width: 150px;
@@ -72,9 +72,10 @@
       font-weight: 600;
       vertical-align: middle;
       display: inline-block;
+      white-space: normal; /* default for desktop */
     }
 
-    /* ========== Navigation ========== */
+    /* ========== Navigation (unchanged) ========== */
     nav {
       background-color: #333;
     }
@@ -95,10 +96,10 @@
     }
     nav li a:hover,
     nav li a:focus {
-      background-color: #002a5f; /* less vibrant navy */
+      background-color: #002a5f;
     }
 
-    /* ========== Main & Section Layout ========== */
+    /* ========== Main Layout ========== */
     main {
       flex-grow: 1;
       max-width: 1200px;
@@ -120,7 +121,7 @@
       margin-bottom: 1rem;
     }
 
-    /* ========== Investor Portal ========== */
+    /* ========== Investor Portal (unchanged on desktop) ========== */
     #home {
       padding-top: 3rem;
     }
@@ -130,7 +131,7 @@
       width: 80%;
       max-width: 800px;
       margin: 0 auto; 
-      overflow: hidden; 
+      overflow: hidden;
       background: linear-gradient(135deg, #e2e2e2, #f9f9f9);
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -171,11 +172,9 @@
       border-radius: 4px;
       width: 100%;
     }
-
-    /* Old Log In button style => margin-top: 1.5rem; align-self: center */
     .portal-form .btn {
       align-self: center;
-      margin-top: 1.5rem;
+      margin-top: 1.5rem; /* old style */
       background-color: #0066cc;
       color: #fff;
       border: none;
@@ -188,7 +187,6 @@
     .portal-form .btn:hover {
       background-color: #005bb5;
     }
-
     .error-message {
       color: red;
       font-size: 0.875rem;
@@ -212,7 +210,7 @@
       border-radius: 8px;
     }
 
-    /* ========== Footer ========== */
+    /* ========== Footer (unchanged on desktop) ========== */
     footer {
       background-color: #333;
       color: white;
@@ -238,35 +236,40 @@
 
     /* ========== Mobile-Only Adjustments ========== */
     @media (max-width: 768px) {
-      /* Let user scroll vertically on mobile */
+      /* Let user scroll vertically, no horizontal scroll */
       body {
         overflow-y: auto;
       }
 
-      /* Re-arrange the header so logo is left, text on one line */
+      /* Header changes for mobile => logo & text on same line */
       header {
+        display: flex; 
+        flex-direction: row; 
+        align-items: center;
+        justify-content: center; /* center the entire row */
+        text-align: left; /* so the logo is truly left, text after it */
         padding: 0.4rem;
-        text-align: left; /* so the logo is on left */
       }
       header img {
-        float: left;
         height: 100px;
-        width: 100px;
-        margin-right: 0.5rem; 
+        width: 100px; 
+        margin-right: 0.5rem;
+        vertical-align: middle;
+        float: none; /* remove float, rely on flex */
       }
       header h1 {
-        font-size: 1.2rem;
-        white-space: nowrap; 
-        display: inline-block; 
-        vertical-align: middle; 
+        font-size: 1.1rem;
+        white-space: nowrap;
+        display: inline-block;
+        margin: 0;
       }
 
-      /* Hide the image from the portal on mobile */
+      /* Hide the portal image on mobile */
       .portal-right {
         display: none;
       }
 
-      /* Let portal-left fill entire container */
+      /* Let portal-left fill entire container on mobile */
       .portal-container {
         aspect-ratio: auto; 
         width: 95%;
@@ -276,7 +279,7 @@
       }
 
       .portal-left h2 {
-        font-size: 1.2rem; 
+        font-size: 1.2rem; /* slightly smaller to stay on one line */
         margin-top: 0; 
       }
     }
