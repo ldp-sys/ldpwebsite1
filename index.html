@@ -15,7 +15,7 @@
   />
 
   <style>
-    /* ========== Global Reset & Base Styles ========== */
+    /* ========== Global Reset & Base Styles (Desktop & Mobile) ========== */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -46,7 +46,7 @@
       text-decoration: underline;
     }
 
-    /* ========== Header (60% as tall) for Desktop ========== */
+    /* ========== Header (Desktop) ========== */
     header {
       background: linear-gradient(
         to bottom,
@@ -54,11 +54,11 @@
         rgba(0, 31, 77, 0.8) 80%
       );
       color: white;
-      padding: 0.6rem; /* about 60% the original ~1rem */
-      text-align: center;
+      /* 60% of original ~1rem => 0.6rem for desktop */
+      padding: 0.6rem;
+      text-align: center; /* center on desktop */
     }
 
-    /* Desktop Logo & Title */
     header img {
       height: 150px;
       width: 150px;
@@ -72,10 +72,10 @@
       font-weight: 600;
       vertical-align: middle;
       display: inline-block;
-      white-space: normal; /* default for desktop */
+      white-space: normal; /* allow wrapping on desktop if needed */
     }
 
-    /* ========== Navigation (unchanged) ========== */
+    /* ========== Navigation ========== */
     nav {
       background-color: #333;
     }
@@ -96,10 +96,10 @@
     }
     nav li a:hover,
     nav li a:focus {
-      background-color: #002a5f;
+      background-color: #002a5f; 
     }
 
-    /* ========== Main Layout ========== */
+    /* ========== Main & Section Layout ========== */
     main {
       flex-grow: 1;
       max-width: 1200px;
@@ -121,7 +121,7 @@
       margin-bottom: 1rem;
     }
 
-    /* ========== Investor Portal (unchanged on desktop) ========== */
+    /* ========== Investor Portal (Desktop) ========== */
     #home {
       padding-top: 3rem;
     }
@@ -130,7 +130,7 @@
       aspect-ratio: 16 / 9;
       width: 80%;
       max-width: 800px;
-      margin: 0 auto; 
+      margin: 0 auto;
       overflow: hidden;
       background: linear-gradient(135deg, #e2e2e2, #f9f9f9);
       border-radius: 8px;
@@ -138,7 +138,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem; 
+      padding: 1rem;
     }
 
     .portal-left {
@@ -172,9 +172,10 @@
       border-radius: 4px;
       width: 100%;
     }
+    /* Old Log In button style => margin-top: 1.5rem; align-self: center */
     .portal-form .btn {
       align-self: center;
-      margin-top: 1.5rem; /* old style */
+      margin-top: 1.5rem;
       background-color: #0066cc;
       color: #fff;
       border: none;
@@ -210,7 +211,7 @@
       border-radius: 8px;
     }
 
-    /* ========== Footer (unchanged on desktop) ========== */
+    /* ========== Footer ========== */
     footer {
       background-color: #333;
       color: white;
@@ -236,51 +237,52 @@
 
     /* ========== Mobile-Only Adjustments ========== */
     @media (max-width: 768px) {
-      /* Let user scroll vertically, no horizontal scroll */
+      /* Let user scroll vertically, remove horizontal overflow */
       body {
         overflow-y: auto;
       }
 
-      /* Header changes for mobile => logo & text on same line */
+      /* Less buffer, text & logo on same line. 
+         Use a flex row approach to keep them side by side. */
       header {
-        display: flex; 
-        flex-direction: row; 
+        display: flex;
+        flex-direction: row;
         align-items: center;
-        justify-content: center; /* center the entire row */
-        text-align: left; /* so the logo is truly left, text after it */
-        padding: 0.4rem;
+        justify-content: flex-start; /* left align content */
+        padding: 0.2rem; /* reduce header padding further */
+        text-align: left; 
       }
       header img {
-        height: 100px;
-        width: 100px; 
-        margin-right: 0.5rem;
+        height: 90px; 
+        width: 90px;
+        margin-right: 0.4rem;
         vertical-align: middle;
-        float: none; /* remove float, rely on flex */
       }
       header h1 {
-        font-size: 1.1rem;
-        white-space: nowrap;
-        display: inline-block;
+        font-size: 1.0rem; 
         margin: 0;
+        white-space: nowrap; /* keep on one line */
       }
 
-      /* Hide the portal image on mobile */
+      /* Hide the portal image in mobile */
       .portal-right {
         display: none;
       }
 
-      /* Let portal-left fill entire container on mobile */
+      /* Let portal-left fill entire container */
       .portal-container {
-        aspect-ratio: auto; 
+        aspect-ratio: auto;
         width: 95%;
         flex-direction: column;
         padding: 1rem;
         height: auto;
       }
 
+      /* Investor Portal Title smaller => single line */
       .portal-left h2 {
-        font-size: 1.2rem; /* slightly smaller to stay on one line */
+        font-size: 1rem; 
         margin-top: 0; 
+        white-space: nowrap; 
       }
     }
   </style>
