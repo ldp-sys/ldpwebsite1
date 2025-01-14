@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Prevent mobile zoom on button clicks -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
   <title>Lighthouse Development Partners</title>
 
   <!-- Fonts -->
@@ -21,7 +22,6 @@
       padding: 0;
     }
 
-    /* Prevent overscroll/bounce showing white behind header/footer */
     html, body {
       height: 100%;
       width: 100%;
@@ -44,7 +44,8 @@
       text-decoration: underline;
     }
 
-    /* ========== Header with Slightly Duller Gradient ========== */
+    /* ========== Header Adjustments ========== */
+    /* Smaller by ~25%, logo 50% bigger than before */
     header {
       background: linear-gradient(
         to bottom,
@@ -52,22 +53,22 @@
         rgba(0, 31, 77, 0.8) 80%
       );
       color: white;
-      padding: 1rem;
+      padding: 0.75rem; /* was 1rem, ~25% smaller */
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    /* Twice as large as before */
+    /* If previously the logo was 100px, increase by 50% => 150px */
     header img {
-      height: 100px;
-      width: 100px;
+      height: 150px;
+      width: 150px;
       object-fit: contain;
-      margin-right: 1rem;
+      margin-right: 0.5rem; /* slightly closer to the text */
     }
 
     header h1 {
-      font-size: 1.8rem;
+      font-size: 1.8rem; /* kept as is or slightly reduce if needed */
       margin: 0;
       text-align: center;
       font-weight: 600;
@@ -92,10 +93,9 @@
       color: white;
       transition: background-color 0.3s ease;
     }
-    /* Less vibrant hover color (#002a5f is a darker, toned-down navy) */
     nav li a:hover,
     nav li a:focus {
-      background-color: #002a5f;
+      background-color: #002a5f; /* less vibrant navy */
     }
 
     /* ========== Main & Section Layout ========== */
@@ -124,6 +124,11 @@
     #home {
       padding-top: 3rem;
     }
+
+    /*
+      Provide a min-height so the tile won't "jump"
+      when the error message appears. E.g., 450px.
+    */
     .portal-container {
       display: flex;
       flex-wrap: wrap;
@@ -134,49 +139,59 @@
       background: linear-gradient(135deg, #e2e2e2, #f9f9f9);
       border-radius: 8px;
       padding: 1.5rem;
+      min-height: 450px; /* ensures enough space for error msg */
     }
+
     .portal-box {
       flex: 1;
       min-width: 300px;
       max-width: 400px;
       display: flex;
       flex-direction: column;
-      align-items: center; /* center the text and button horizontally */
+      align-items: center; /* center text horizontally */
+      /* Title higher by 25% => negative margin-top, or smaller top margin. */
     }
+    /* Shift the title up, ~25% from original */
     .portal-box h2 {
       margin-bottom: 1rem;
+      margin-top: -0.5rem; /* shift up slightly */
       font-size: 1.5rem;
       font-weight: 600;
-      text-align: center; /* ensure the heading is centered too */
+      text-align: center;
     }
+
+    /* Now place button lower => add margin-top in the form */
     .portal-box form {
       width: 100%;
-      max-width: 280px; /* narrower to keep form fields together */
+      max-width: 280px;
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
+      margin-bottom: 1rem; /* push button area down if needed */
     }
-    .portal-box label {
-      font-weight: 600;
-    }
+
+    /* If you want the button even lower, you can do margin-top on the button itself */
     .portal-box input {
       width: 100%;
       padding: 0.5rem;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
+
+    /* The error message with a line space before it => margin-top: 1rem */
+    .error-message {
+      margin-top: 1rem; /* single line space */
+      color: red;
+      font-size: 0.875rem;
+      display: none;
+    }
+
     .portal-image {
       flex: 1;
       min-width: 300px;
       max-width: 500px;
       border-radius: 8px;
       object-fit: cover;
-    }
-    .error-message {
-      color: red;
-      font-size: 0.875rem;
-      margin-top: 0.75rem;
-      display: none;
     }
 
     /* ========== Buttons: Standard .btn Style ========== */
@@ -190,6 +205,7 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
       align-self: center; /* center button horizontally in the form container */
+      margin-top: 1.5rem; /* push it ~25% lower from original */
     }
     .btn:hover {
       background-color: #005bb5;
@@ -229,7 +245,6 @@
       padding: 1rem;
       text-align: center;
     }
-
     .team-member img {
       width: 280px;
       height: 280px;
@@ -238,7 +253,6 @@
       background-color: #ccc;
       margin-bottom: 1rem;
     }
-
     .team-member h3 {
       margin-bottom: 0.5rem;
       font-weight: 600;
@@ -294,12 +308,10 @@
       margin: 2rem 0;
     }
 
-    /* Extra spacing below the title “Images from Our Completed Projects” */
     h3 + .gallery {
       margin-top: 1rem;
     }
 
-    /* 3×3 Grid, bigger images */
     .gallery {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -338,7 +350,7 @@
       margin-top: 0.5rem;
     }
 
-    /* ========== Footer (14px font) ========== */
+    /* ========== Footer: 33% Smaller & Smaller Font ========== */
     footer {
       background-color: #333;
       color: white;
@@ -346,8 +358,8 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      padding: 1rem;
-      font-size: 14px;
+      padding: 0.66rem; /* ~33% smaller than 1rem */
+      font-size: 12px;  /* smaller to fit */
     }
     footer .footer-content {
       flex: 1;
@@ -355,7 +367,7 @@
       margin-bottom: 0.5rem;
     }
     footer img {
-      height: 80px; /* Twice the previous 40px */
+      height: 80px; /* same or reduce if you wish */
       width: 80px;
       object-fit: contain;
     }
@@ -383,6 +395,7 @@
       .portal-container {
         flex-direction: column;
         align-items: flex-start;
+        min-height: auto; /* so mobile doesn't force a large blank space */
       }
       .portal-box, .portal-image {
         max-width: 100%;
@@ -392,10 +405,9 @@
         width: 100%;
       }
 
-      /* For smaller devices, maybe keep the gallery 2×2 or 2×3, adjust as needed */
       .gallery {
         grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 150px; 
+        grid-auto-rows: 150px;
       }
     }
   </style>
@@ -414,11 +426,11 @@
   <!-- Navigation -->
   <nav>
     <ul>
-      <li><a href="#home" class="nav-link" data-target="home">Home</a></li>
-      <li><a href="#about" class="nav-link" data-target="about">About</a></li>
-      <li><a href="#team" class="nav-link" data-target="team">Team</a></li>
-      <li><a href="#projects" class="nav-link" data-target="projects">Projects</a></li>
-      <li><a href="#contact" class="nav-link" data-target="contact">Contact</a></li>
+      <li><a href="#home" class="nav-link" data-target="home" onclick="goTop()">Home</a></li>
+      <li><a href="#about" class="nav-link" data-target="about" onclick="goTop()">About</a></li>
+      <li><a href="#team" class="nav-link" data-target="team" onclick="goTop()">Team</a></li>
+      <li><a href="#projects" class="nav-link" data-target="projects" onclick="goTop()">Projects</a></li>
+      <li><a href="#contact" class="nav-link" data-target="contact" onclick="goTop()">Contact</a></li>
     </ul>
   </nav>
 
@@ -442,6 +454,7 @@
               Log In
             </button>
           </form>
+          <!-- Single line space before error message -->
           <p id="error-message" class="error-message"></p>
         </div>
 
@@ -546,7 +559,6 @@
           <p>Start Date: 2024</p>
         </div>
         <div class="project-images">
-          <!-- Replace these placeholders with actual images as needed -->
           <img
             src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
             alt="Project image 1 for Reserve at Eastwood"
@@ -563,7 +575,6 @@
       </div>
       <div class="divider"></div>
       <h3>Images from Our Completed Projects</h3>
-      <!-- 3×3, each 200px tall (can adjust in CSS) -->
       <div class="gallery">
         <img
           src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
@@ -667,6 +678,10 @@
   </footer>
 
   <script>
+    function goTop() {
+      window.scrollTo({ top: 0 });
+    }
+
     // Navigation
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
@@ -674,6 +689,8 @@
         e.preventDefault();
         const targetId = link.dataset.target;
         showSection(targetId);
+        // Also scroll to top each time a user clicks a tab
+        goTop();
         window.location.hash = targetId;
       });
     });
@@ -688,12 +705,12 @@
       const hash = window.location.hash.replace('#', '');
       if (hash) {
         showSection(hash);
+        goTop();
       }
     });
 
-    // Login handler
+    // Investor Portal login
     function handleLogin() {
-      // Display error message only
       const errorMsg = document.getElementById('error-message');
       errorMsg.innerText =
         'Investor account not found, please reach out to your contact at Lighthouse Development Partners.';
