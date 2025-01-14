@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Prevent mobile zoom on button clicks -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
   <meta charset="UTF-8" />
   <title>Lighthouse Development Partners</title>
@@ -21,6 +22,7 @@
       padding: 0;
     }
 
+    /* Prevent overscroll/bounce (white behind header/footer) */
     html, body {
       height: 100%;
       width: 100%;
@@ -43,7 +45,7 @@
       text-decoration: underline;
     }
 
-    /* ========== Header (Reduced by 25%) ========== */
+    /* ========== Header (reduced height ~30%) ========== */
     header {
       background: linear-gradient(
         to bottom,
@@ -51,22 +53,22 @@
         rgba(0, 31, 77, 0.8) 80%
       );
       color: white;
-      padding: 0.75rem; /* Reduced by ~25% */
+      padding: 0.7rem; /* reduced from 1rem to ~70% */
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    /* Logo closer to the title */
+    /* Twice previous size => 100px instead of 50px */
     header img {
-      height: 75px;
-      width: 75px;
+      height: 100px;
+      width: 100px;
       object-fit: contain;
-      margin-right: 0.5rem; /* Reduced spacing */
+      margin-right: 1rem;
     }
 
     header h1 {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       margin: 0;
       text-align: center;
       font-weight: 600;
@@ -93,10 +95,10 @@
     }
     nav li a:hover,
     nav li a:focus {
-      background-color: #002a5f;
+      background-color: #002a5f; /* less vibrant navy */
     }
 
-    /* ========== Main Content ========== */
+    /* ========== Main & Section Layout ========== */
     main {
       flex-grow: 1;
       max-width: 1200px;
@@ -118,7 +120,7 @@
       margin-bottom: 1rem;
     }
 
-    /* ========== Investor Portal (Fixed Size, Adjusted Layout) ========== */
+    /* ========== Investor Portal (Home) ========== */
     #home {
       padding-top: 3rem;
     }
@@ -132,28 +134,32 @@
       background: linear-gradient(135deg, #e2e2e2, #f9f9f9);
       border-radius: 8px;
       padding: 1.5rem;
-      /* Fixed tile size */
-      width: 600px;
-      height: 350px;
     }
+
     .portal-box {
       flex: 1;
-      max-width: 250px;
+      min-width: 300px;
+      max-width: 400px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between; /* Space out title, fields, button */
+      /* Move title up a bit */
+      margin-top: -0.5rem; 
     }
+
+    /* Center the title horizontally, but keep input fields left-aligned */
     .portal-box h2 {
-      margin-top: -1rem; /* Title is now 25% higher */
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
       text-align: center;
+      margin-bottom: 0.5rem; /* slightly less spacing */
     }
+
+    /* Now the form is left-aligned, 
+       and the log in button is spaced lower */
     .portal-box form {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
-      margin-bottom: 1rem; /* Space above button */
+      margin-left: 0;  /* left align */
+      margin-right: auto;
+      gap: 0.5rem;     /* slightly smaller gap between fields */
     }
     .portal-box label {
       font-weight: 600;
@@ -164,26 +170,182 @@
       border: 1px solid #ccc;
       border-radius: 4px;
     }
+
     .portal-box .btn {
-      width: 100px;
-      align-self: center; /* Center the button */
-      margin-top: 1rem; /* Push the button lower */
+      margin-top: 1rem; /* push it lower down */
+      width: 120px;     /* narrower button */
     }
+
     .portal-image {
       flex: 1;
+      min-width: 300px;
+      max-width: 500px;
       border-radius: 8px;
       object-fit: cover;
-      height: 100%; /* Match the height of the portal */
     }
+
     .error-message {
-      margin-top: 1rem; /* Line space before the error message */
       color: red;
       font-size: 0.875rem;
-      text-align: center;
+      margin-top: 0.75rem;
       display: none;
     }
 
-    /* ========== Footer (Reduced by 33%) ========== */
+    /* ========== Buttons: Standard .btn Style ========== */
+    .btn {
+      background-color: #0066cc;
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #005bb5;
+    }
+
+    /* ========== About Section ========== */
+    .about-section {
+      margin-bottom: 2rem;
+    }
+    .about-section h3 {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    /* ========== Team Section ========== */
+    #team h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .team-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .team-member {
+      width: 320px;
+      background: linear-gradient(135deg, #e2e2e2, #f9f9f9);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .team-member img {
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 12px; 
+      background-color: #ccc;
+      margin-bottom: 1rem;
+    }
+
+    .team-member h3 {
+      margin-bottom: 0.5rem;
+    }
+    .team-member .title-block {
+      min-height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+    }
+    .team-member .contact-info {
+      font-size: 14px;
+      margin: 0.25rem 0;
+    }
+    .team-member .contact-info.email {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 95%;
+      margin: 0.25rem auto 0.5rem auto;
+    }
+    .team-member .contact-info.phone {
+      margin-bottom: 0.5rem;
+    }
+
+    /* ========== Projects Section & Gallery ========== */
+    .projects-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .projects-details {
+      flex: 1;
+      min-width: 250px;
+    }
+    .project-images {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .project-images img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 5px;
+      background-color: #ccc;
+    }
+
+    .divider {
+      border-top: 1px solid #ccc;
+      margin: 2rem 0;
+    }
+
+    h3 + .gallery {
+      margin-top: 1rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 200px;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background-color: #ccc;
+      border-radius: 5px;
+    }
+
+    /* ========== Contact Section ========== */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .contact-form label {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: inherit;
+      width: 200%;
+    }
+    .contact-form button {
+      margin-top: 0.5rem;
+    }
+
+    /* ========== Footer (14px font) ========== */
     footer {
       background-color: #333;
       color: white;
@@ -191,8 +353,8 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      padding: 0.5rem; /* Reduced height */
-      font-size: 12px; /* Smaller font size */
+      padding: 1rem;
+      font-size: 14px;
     }
     footer .footer-content {
       flex: 1;
@@ -200,72 +362,303 @@
       margin-bottom: 0.5rem;
     }
     footer img {
-      height: 50px; /* Reduced to maintain proportions */
-      width: 50px;
+      height: 80px;
+      width: 80px;
       object-fit: contain;
     }
 
-    /* ========== Media Queries for Mobile ========== */
+    /* ========== Media Queries ========== */
     @media (max-width: 768px) {
+      header {
+        padding: 0.5rem; /* even smaller for mobile if desired */
+      }
       header img {
-        height: 60px;
-        width: 60px;
+        height: 80px;
+        width: 80px;
       }
       header h1 {
         font-size: 1.4rem;
       }
+      .projects-container {
+        flex-direction: column;
+      }
+      .projects-details, .project-images {
+        max-width: 100%;
+      }
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+      }
+
+      #home {
+        padding-top: 1.5rem;
+      }
       .portal-container {
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
       }
-      .portal-box {
+      .portal-box, .portal-image {
         max-width: 100%;
-        text-align: center;
       }
       .portal-image {
         margin-top: 1rem;
         width: 100%;
-        height: auto;
+      }
+
+      /* 2 columns in gallery on mobile */
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 150px;
       }
     }
   </style>
 </head>
+
 <body>
   <!-- Header -->
   <header>
-    <img src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/ldplogo.png" alt="Lighthouse Development Partners logo" />
+    <img 
+      src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/ldplogo.png" 
+      alt="Lighthouse Development Partners logo"
+    />
     <h1>Lighthouse Development Partners</h1>
   </header>
 
   <!-- Navigation -->
   <nav>
     <ul>
-      <li><a href="#home" class="nav-link" onclick="scrollToTop()">Home</a></li>
-      <li><a href="#about" class="nav-link" onclick="scrollToTop()">About</a></li>
-      <li><a href="#team" class="nav-link" onclick="scrollToTop()">Team</a></li>
-      <li><a href="#projects" class="nav-link" onclick="scrollToTop()">Projects</a></li>
-      <li><a href="#contact" class="nav-link" onclick="scrollToTop()">Contact</a></li>
+      <li><a href="#home" class="nav-link" data-target="home">Home</a></li>
+      <li><a href="#about" class="nav-link" data-target="about">About</a></li>
+      <li><a href="#team" class="nav-link" data-target="team">Team</a></li>
+      <li><a href="#projects" class="nav-link" data-target="projects">Projects</a></li>
+      <li><a href="#contact" class="nav-link" data-target="contact">Contact</a></li>
     </ul>
   </nav>
 
   <!-- Main Content -->
   <main>
-    <!-- Home Section -->
+    <!-- Home Section: Investor Portal -->
     <section id="home" class="active">
       <div class="portal-container">
+        <!-- Left side: login box -->
         <div class="portal-box">
           <h2>Investor Portal</h2>
           <form>
             <label for="username">Username</label>
             <input type="text" id="username" name="username" required />
+
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required />
-            <button class="btn" type="button" onclick="showErrorMessage()">Log In</button>
+
+            <!-- type="button" to prevent any default form submission/zoom -->
+            <button class="btn" type="button" onclick="handleLogin()">
+              Log In
+            </button>
           </form>
-          <p id="error-message" class="error-message">Investor account not found, please reach out to your contact at Lighthouse Development Partners.</p>
+          <p id="error-message" class="error-message"></p>
         </div>
-        <img src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg" alt="Portal Login" class="portal-image" />
+
+        <!-- Right side: image -->
+        <img
+          class="portal-image"
+          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
+          alt="Portal login illustration"
+        />
       </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+      <h2>About Us</h2>
+      <p>
+        Lighthouse Development Partners (LDP) was co-founded by childhood friends Harley Sisler and Sean Smith, who reconnected through their shared passion for real estate development. With distinct yet complementary backgrounds, they have positioned LDP as a formidable force in the real estate development sector.
+      </p>
+
+      <h3>Development Thesis</h3>
+      <p>
+        Our approach blends innovative design, economic feasibility, and a commitment to long-term impact. Drawing from our team's expertise in multifamily and hospitality development, finance, and market analysis, we focus on creating projects that are not only financially viable but also contribute positively to communities. We leverage cutting-edge technologies and sustainable practices, ensuring our developments thrive across market cycles.
+      </p>
+
+      <h3>Investment Criteria</h3>
+      <p>
+        At LDP, we focus on projects with strong fundamentals, growth potential, and alignment with our mission of sustainable development. Our expertise in navigating complex financing structures, particularly in the Low Income Housing Tax Credit (LIHTC) space, enables us to bring forward multifamily and affordable housing projects that meet market needs and provide strong returns for our stakeholders.
+      </p>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team">
+      <h2>Meet Our Team</h2>
+      <div class="team-container">
+        <!-- Sean Smith -->
+        <div class="team-member">
+          <img
+            src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/Sean.jpg"
+            alt="Portrait of Sean Smith"
+          />
+          <h3>Sean Smith</h3>
+          <div class="title-block">
+            <p>Managing Partner, Affordable Development</p>
+          </div>
+          <a
+            class="contact-info email"
+            href="mailto:ssmith@lighthousedevelopment.com"
+          >
+            ssmith@lighthousedevelopment.com
+          </a>
+          <p class="contact-info phone">813-952-0984</p>
+        </div>
+
+        <!-- Harley Sisler -->
+        <div class="team-member">
+          <img
+            src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/harley.jpg"
+            alt="Portrait of Harley Sisler"
+          />
+          <h3>Harley Sisler</h3>
+          <div class="title-block">
+            <p>Managing Partner, Hospitality & Market Rate</p>
+          </div>
+          <a
+            class="contact-info email"
+            href="mailto:hsisler@lighthousedevelopment.com"
+          >
+            hsisler@lighthousedevelopment.com
+          </a>
+          <p class="contact-info phone">336-413-3410</p>
+        </div>
+
+        <!-- Maxfield Branson -->
+        <div class="team-member">
+          <img
+            src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/Maxfield.jpg"
+            alt="Portrait of Maxfield Branson"
+          />
+          <h3>Maxfield Branson</h3>
+          <div class="title-block">
+            <p>Operations</p>
+          </div>
+          <a
+            class="contact-info email"
+            href="mailto:mbranson@lighthousedevelopment.com"
+          >
+            mbranson@lighthousedevelopment.com
+          </a>
+          <p class="contact-info phone">646-464-4218</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+      <h2>Our Projects</h2>
+      <div class="projects-container">
+        <div class="projects-details">
+          <h3>Reserve at Eastwood</h3>
+          <p>Location: Fort Myers, FL</p>
+          <p>Type: LIHTC, Affordable Housing, Multifamily</p>
+          <p>Start Date: 2024</p>
+        </div>
+        <div class="project-images">
+          <!-- Replace these placeholders with actual images as needed -->
+          <img
+            src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
+            alt="Project image 1 for Reserve at Eastwood"
+          />
+          <img
+            src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
+            alt="Project image 2 for Reserve at Eastwood"
+          />
+          <img
+            src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
+            alt="Project image 3 for Reserve at Eastwood"
+          />
+        </div>
+      </div>
+      <div class="divider"></div>
+      <h3>Images from Our Completed Projects</h3>
+      <div class="gallery">
+        <img
+          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
+          alt="Completed Project 1"
+        />
+        <img
+          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
+          alt="Completed Project 2"
+        />
+        <img
+          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
+          alt="Completed Project 3"
+        />
+        <img
+          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
+          alt="Completed Project 4"
+        />
+        <img
+          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
+          alt="Completed Project 5"
+        />
+        <img
+          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
+          alt="Completed Project 6"
+        />
+        <img
+          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
+          alt="Completed Project 7"
+        />
+        <img
+          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
+          alt="Completed Project 8"
+        />
+        <img
+          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
+          alt="Completed Project 9"
+        />
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <form class="contact-form" onsubmit="submitContactForm(event)">
+        <label for="name">Your Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Your Name"
+          required
+        />
+
+        <label for="email">Your Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Your Email"
+          required
+        />
+
+        <label for="phone">Your Phone Number</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="Your Phone Number"
+          required
+        />
+
+        <label for="message">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          placeholder="Write your message here..."
+          required
+        ></textarea>
+
+        <button class="btn" type="submit">Send</button>
+      </form>
+      <p id="contact-response" style="color: green; margin-top: 0.75rem; display: none;"></p>
     </section>
   </main>
 
@@ -276,18 +669,69 @@
       <p>(123) 456-7890</p>
       <p>&copy; 2025 Lighthouse Development Partners</p>
     </div>
-    <img src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/ldplogo.png" alt="Footer Logo" />
+    <img 
+      src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/ldplogo.png" 
+      alt="Lighthouse Development Partners small logo"
+    />
   </footer>
 
   <script>
-    // Scroll to Top on Tab Click
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Navigation
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.dataset.target;
+        showSection(targetId);
+        window.location.hash = targetId;
+      });
+    });
+
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('main section');
+      sections.forEach(s => s.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
     }
 
-    // Show Error Message in Portal
-    function showErrorMessage() {
-      document.getElementById('error-message').style.display = 'block';
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash) {
+        showSection(hash);
+      }
+    });
+
+    // Handle Investor Portal Login
+    function handleLogin() {
+      // Show error message only, no page reload
+      const errorMsg = document.getElementById('error-message');
+      errorMsg.innerText =
+        'Investor account not found, please reach out to your contact at Lighthouse Development Partners.';
+      errorMsg.style.display = 'block';
+    }
+
+    // Handle Contact Form Submission (front-end only)
+    function submitContactForm(event) {
+      event.preventDefault();
+      const nameValue = document.getElementById('name').value;
+      const emailValue = document.getElementById('email').value;
+      const phoneValue = document.getElementById('phone').value;
+      const messageValue = document.getElementById('message').value;
+
+      // Log info in the console (no back-end solution here)
+      console.log('Contact Form Submission:', {
+        name: nameValue,
+        email: emailValue,
+        phone: phoneValue,
+        message: messageValue
+      });
+
+      // Show success message to user
+      const responseEl = document.getElementById('contact-response');
+      responseEl.innerText = 'Thank you for contacting us! We have received your message.';
+      responseEl.style.display = 'block';
+
+      // Optionally, clear the form fields
+      event.target.reset();
     }
   </script>
 </body>
