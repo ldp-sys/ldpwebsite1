@@ -21,10 +21,12 @@
       padding: 0;
     }
 
+    /* Prevent overscroll/bounce showing white behind header/footer */
     html, body {
       height: 100%;
       width: 100%;
       color: #333;
+      overscroll-behavior: none; /* prevents bounce on modern browsers */
     }
 
     body {
@@ -56,9 +58,10 @@
       justify-content: center;
     }
 
+    /* Twice as large as before */
     header img {
-      height: 50px;
-      width: 50px;
+      height: 100px;
+      width: 100px;
       object-fit: contain;
       margin-right: 1rem;
     }
@@ -89,9 +92,10 @@
       color: white;
       transition: background-color 0.3s ease;
     }
+    /* Less vibrant hover color (#002a5f is a darker, toned-down navy) */
     nav li a:hover,
     nav li a:focus {
-      background-color: navy;
+      background-color: #002a5f;
     }
 
     /* ========== Main & Section Layout ========== */
@@ -118,7 +122,7 @@
 
     /* ========== Investor Portal (Home) ========== */
     #home {
-      padding-top: 3rem; /* half the prior space from top */
+      padding-top: 3rem;
     }
     .portal-container {
       display: flex;
@@ -135,21 +139,29 @@
       flex: 1;
       min-width: 300px;
       max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* center the text and button horizontally */
     }
     .portal-box h2 {
       margin-bottom: 1rem;
       font-size: 1.5rem;
       font-weight: 600;
+      text-align: center; /* ensure the heading is centered too */
+    }
+    .portal-box form {
+      width: 100%;
+      max-width: 280px; /* narrower to keep form fields together */
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
     }
     .portal-box label {
-      display: block;
-      margin: 0.5rem 0 0.25rem;
       font-weight: 600;
     }
     .portal-box input {
       width: 100%;
       padding: 0.5rem;
-      margin-bottom: 0.75rem;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
@@ -177,6 +189,7 @@
       border-radius: 4px;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      align-self: center; /* center button horizontally in the form container */
     }
     .btn:hover {
       background-color: #005bb5;
@@ -217,7 +230,6 @@
       text-align: center;
     }
 
-    /* Larger, near edge of tile: 280px wide in a 320px tile */
     .team-member img {
       width: 280px;
       height: 280px;
@@ -242,8 +254,6 @@
       font-size: 14px;
       margin: 0.25rem 0;
     }
-    /* Max width 95% so it doesn’t wrap. 
-       Slightly reduced margins to avoid cut-off. */
     .team-member .contact-info.email {
       white-space: nowrap;
       overflow: hidden;
@@ -278,18 +288,28 @@
       border-radius: 5px;
       background-color: #ccc;
     }
+
     .divider {
       border-top: 1px solid #ccc;
       margin: 2rem 0;
     }
+
+    /* Extra spacing below the title “Images from Our Completed Projects” */
+    h3 + .gallery {
+      margin-top: 1rem;
+    }
+
+    /* 3×3 Grid, bigger images */
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 0.75rem;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 200px; /* each row 200px tall */
+      gap: 1rem;
+      margin-bottom: 1.5rem;
     }
     .gallery img {
       width: 100%;
-      height: auto;
+      height: 100%;
       object-fit: cover;
       background-color: #ccc;
       border-radius: 5px;
@@ -335,8 +355,8 @@
       margin-bottom: 0.5rem;
     }
     footer img {
-      height: 40px;
-      width: 40px;
+      height: 80px; /* Twice the previous 40px */
+      width: 80px;
       object-fit: contain;
     }
 
@@ -371,6 +391,12 @@
         margin-top: 1rem;
         width: 100%;
       }
+
+      /* For smaller devices, maybe keep the gallery 2×2 or 2×3, adjust as needed */
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 150px; 
+      }
     }
   </style>
 </head>
@@ -404,14 +430,17 @@
         <!-- Left side: login box -->
         <div class="portal-box">
           <h2>Investor Portal</h2>
-          <form onsubmit="handleLogin(event)">
+          <form>
             <label for="username">Username</label>
             <input type="text" id="username" name="username" required />
 
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required />
 
-            <button class="btn" type="submit">Log In</button>
+            <!-- type="button" so it does NOT trigger default form submission/zoom -->
+            <button class="btn" type="button" onclick="handleLogin()">
+              Log In
+            </button>
           </form>
           <p id="error-message" class="error-message"></p>
         </div>
@@ -534,8 +563,8 @@
       </div>
       <div class="divider"></div>
       <h3>Images from Our Completed Projects</h3>
+      <!-- 3×3, each 200px tall (can adjust in CSS) -->
       <div class="gallery">
-        <!-- Replace placeholders if you have real images -->
         <img
           src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
           alt="Completed Project 1"
@@ -663,12 +692,11 @@
     });
 
     // Login handler
-    function handleLogin(event) {
-      event.preventDefault();
-      // Show error message for demonstration
+    function handleLogin() {
+      // Display error message only
       const errorMsg = document.getElementById('error-message');
       errorMsg.innerText =
-        'Investor account not found, please reach out to your contact at Lighthouse Development Partners';
+        'Investor account not found, please reach out to your contact at Lighthouse Development Partners.';
       errorMsg.style.display = 'block';
     }
   </script>
