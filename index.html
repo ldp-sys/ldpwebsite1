@@ -34,7 +34,7 @@
       flex-direction: column;
       min-height: 100vh;
       font-family: 'Open Sans', sans-serif;
-      /* Prevent horizontal scroll on all devices */
+      /* Keep horizontal scroll hidden for desktop, but we’ll fix mobile below */
       overflow-x: hidden;
     }
 
@@ -46,7 +46,7 @@
       text-decoration: underline;
     }
 
-    /* ========== Header (60% as tall; keep logo & title same size) ========== */
+    /* ========== Header (60% as tall; keep logo & title same size on desktop) ========== */
     header {
       background: linear-gradient(
         to bottom,
@@ -54,9 +54,9 @@
         rgba(0, 31, 77, 0.8) 80%
       );
       color: white;
-      /* 60% of the original ~1rem => 0.6rem */
+      /* from 1rem => 0.6rem is ~60% the original height */
       padding: 0.6rem;
-      text-align: center; /* Center the content horizontally */
+      text-align: center;
     }
 
     header img {
@@ -64,7 +64,6 @@
       width: 150px;
       object-fit: contain;
       margin-right: 1rem;
-      display: inline-block; 
       vertical-align: middle;
     }
 
@@ -72,8 +71,8 @@
       font-size: 1.8rem;
       margin: 0;
       font-weight: 600;
-      display: inline-block; 
-      vertical-align: middle; 
+      vertical-align: middle;
+      display: inline-block;
     }
 
     /* ========== Navigation ========== */
@@ -122,7 +121,7 @@
       margin-bottom: 1rem;
     }
 
-    /* ========== Investor Portal (16:9 tile, half square image) ========== */
+    /* ========== Investor Portal ========== */
     #home {
       padding-top: 3rem;
     }
@@ -131,7 +130,7 @@
       aspect-ratio: 16 / 9;
       width: 80%;
       max-width: 800px;
-      margin: 0 auto; /* center horizontally */
+      margin: 0 auto; 
       overflow: hidden; 
       background: linear-gradient(135deg, #e2e2e2, #f9f9f9);
       border-radius: 8px;
@@ -173,7 +172,8 @@
       border-radius: 4px;
       width: 100%;
     }
-    /* Revert to old Log In button style => margin-top: 1.5rem; align-self: center */
+
+    /* Old Log In button style => margin-top: 1.5rem; align-self: center */
     .portal-form .btn {
       align-self: center;
       margin-top: 1.5rem;
@@ -213,7 +213,7 @@
       border-radius: 8px;
     }
 
-    /* ========== Footer remains as is, 33% smaller & 12px ========== */
+    /* ========== Footer ========== */
     footer {
       background-color: #333;
       color: white;
@@ -237,28 +237,37 @@
       object-fit: contain;
     }
 
-    /* ========== Media Queries (Mobile Only) ========== */
+    /* ========== Mobile-Only Adjustments ========== */
     @media (max-width: 768px) {
-      /* Hide horizontal runner, if any */
-      html, body {
-        overflow-x: hidden;
+      /* Let user scroll vertically on mobile without cutting off footer */
+      body {
+        overflow-y: auto;
       }
 
-      /* Slightly reduce header space & text if needed */
+      /* Slightly reduce header space & size. Center the text, keep logo left of text */
       header {
         padding: 0.4rem;
+        text-align: center; /* ensure overall centering */
+      }
+      header img {
+        float: left;
+        height: 100px;
+        width: 100px; 
+        margin-right: 0.5rem; 
       }
       header h1 {
         font-size: 1.2rem;
-        white-space: nowrap; /* keep text on one line */
+        white-space: nowrap; 
+        display: inline-block; 
+        vertical-align: middle; 
       }
 
-      /* Remove image from mobile version, keep only the left side */
+      /* Remove the image from portal on mobile */
       .portal-right {
-        display: none; 
+        display: none;
       }
 
-      /* Let portal-left fill entire container on mobile */
+      /* Let portal-left fill entire container */
       .portal-container {
         aspect-ratio: auto; 
         width: 95%;
@@ -284,7 +293,7 @@
     <h1>Lighthouse Development Partners</h1>
   </header>
 
-  <!-- Navigation: Only HOME -->
+  <!-- Navigation -->
   <nav>
     <ul>
       <li><a href="#home" class="nav-link" data-target="home" onclick="goTop()">Home</a></li>
@@ -296,7 +305,6 @@
     <!-- Home Section -->
     <section id="home" class="active">
       <div class="portal-container">
-        <!-- Left half: Portal Text & Form -->
         <div class="portal-left">
           <h2>Investor Portal</h2>
           <form class="portal-form">
@@ -306,7 +314,6 @@
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required />
 
-            <!-- Old button style restored -->
             <button class="btn" type="button" onclick="handleLogin()">
               Log In
             </button>
@@ -314,7 +321,7 @@
           <p id="error-message" class="error-message"></p>
         </div>
 
-        <!-- Right half: Larger Square Image (hidden on mobile) -->
+        <!-- Right half (desktop only) -->
         <div class="portal-right">
           <img
             src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
@@ -349,7 +356,6 @@
         e.preventDefault();
         const targetId = link.dataset.target;
         showSection(targetId);
-        // Also scroll to top each time a user clicks a tab
         goTop();
         window.location.hash = targetId;
       });
