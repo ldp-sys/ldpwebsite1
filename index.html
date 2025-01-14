@@ -59,7 +59,7 @@
       justify-content: center;
     }
 
-    /* Logo & Title remain same dimensions/font */
+    /* Logo & Title remain same dimensions/font on desktop */
     header img {
       height: 150px;
       width: 150px;
@@ -71,6 +71,7 @@
       margin: 0;
       text-align: center;
       font-weight: 600;
+      /* On desktop, remains the same. We'll handle mobile in @media. */
     }
 
     /* ========== Navigation ========== */
@@ -204,7 +205,6 @@
       height: 90%;
       object-fit: cover;
       border-radius: 8px;
-      /* so it's square => whichever dimension is smaller is the limiting factor */
     }
 
     /* ========== Buttons: Standard .btn Style ========== */
@@ -243,6 +243,53 @@
       width: 80px;
       object-fit: contain;
     }
+
+    /* ========== Mobile Overrides ========== */
+    @media (max-width: 768px) {
+      /* Header adjustments for mobile */
+      header {
+        padding: 0.4rem; /* further reduce the top/bottom space */
+      }
+      header img {
+        height: 100px;
+        width: 100px; /* smaller logo on mobile if desired */
+      }
+      header h1 {
+        font-size: 1.2rem; /* keep text on one line */
+        white-space: nowrap; /* ensure it doesn't break into multiple lines */
+      }
+
+      /* Portal container on mobile => stacked layout */
+      .portal-container {
+        aspect-ratio: auto; /* remove forced ratio if it’s too constraining */
+        width: 90%; /* narrower if needed */
+        flex-direction: column;
+        padding: 1rem;
+        height: auto; /* let content define height */
+      }
+      .portal-left, .portal-right {
+        width: 100%;
+        height: auto;
+      }
+
+      /* Portal Title & form scale down */
+      .portal-left h2 {
+        font-size: 1.2rem; /* reduce if text is too large on mobile */
+        margin-top: 0; /* remove negative margin to avoid overlap */
+        text-align: center;
+      }
+      .portal-form {
+        width: 100%; /* let it span container width */
+      }
+
+      /* The image becomes smaller square on mobile */
+      .portal-right img {
+        width: 70%; /* or ~80%, so it doesn’t overlap text */
+        height: auto; /* keep it from forcing a big square */
+        margin: 1rem auto 0;
+        display: block;
+      }
+    }
   </style>
 </head>
 
@@ -260,13 +307,12 @@
   <nav>
     <ul>
       <li><a href="#home" class="nav-link" data-target="home" onclick="goTop()">Home</a></li>
-      <!-- All other tabs removed -->
     </ul>
   </nav>
 
   <!-- Main Content -->
   <main>
-    <!-- HOME (Active) -->
+    <!-- Home Section: 16:9 Investor Portal (Desktop), stacked on mobile -->
     <section id="home" class="active">
       <div class="portal-container">
         <!-- Left half: Portal Text & Form -->
@@ -301,7 +347,6 @@
   <footer>
     <div class="footer-content">
       <p>360 Central Ave, Suite 800, St Petersburg FL, 33701</p>
-      <!-- Removed phone number line -->
       <p>&copy; 2025 Lighthouse Development Partners</p>
     </div>
     <img 
