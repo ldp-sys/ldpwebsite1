@@ -44,8 +44,7 @@
       text-decoration: underline;
     }
 
-    /* ========== Header Adjustments ========== */
-    /* Smaller by ~25%, logo 50% bigger than before */
+    /* ========== Header 33% Smaller ========== */
     header {
       background: linear-gradient(
         to bottom,
@@ -53,22 +52,22 @@
         rgba(0, 31, 77, 0.8) 80%
       );
       color: white;
-      padding: 0.75rem; /* was 1rem, ~25% smaller */
+      /* from 1rem -> ~0.66rem is roughly 33% smaller */
+      padding: 0.66rem;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    /* If previously the logo was 100px, increase by 50% => 150px */
+    /* Logo & Title remain same size */
     header img {
-      height: 150px;
-      width: 150px;
+      height: 100px;
+      width: 100px;
       object-fit: contain;
-      margin-right: 0.5rem; /* slightly closer to the text */
+      margin-right: 1rem;
     }
-
     header h1 {
-      font-size: 1.8rem; /* kept as is or slightly reduce if needed */
+      font-size: 1.8rem;
       margin: 0;
       text-align: center;
       font-weight: 600;
@@ -124,11 +123,6 @@
     #home {
       padding-top: 3rem;
     }
-
-    /*
-      Provide a min-height so the tile won't "jump"
-      when the error message appears. E.g., 450px.
-    */
     .portal-container {
       display: flex;
       flex-wrap: wrap;
@@ -139,62 +133,44 @@
       background: linear-gradient(135deg, #e2e2e2, #f9f9f9);
       border-radius: 8px;
       padding: 1.5rem;
-      min-height: 450px; /* ensures enough space for error msg */
+      /* Provide a fixed min-height so it doesn't jump on error text */
+      min-height: 450px;
     }
-
     .portal-box {
       flex: 1;
       min-width: 300px;
       max-width: 400px;
       display: flex;
       flex-direction: column;
-      align-items: center; /* center text horizontally */
-      /* Title higher by 25% => negative margin-top, or smaller top margin. */
+      align-items: center; /* center text & button horizontally */
     }
-    /* Shift the title up, ~25% from original */
     .portal-box h2 {
       margin-bottom: 1rem;
-      margin-top: -0.5rem; /* shift up slightly */
       font-size: 1.5rem;
       font-weight: 600;
       text-align: center;
+      margin-top: -0.5rem; /* shift ~25% higher */
     }
-
-    /* Now place button lower => add margin-top in the form */
     .portal-box form {
       width: 100%;
       max-width: 280px;
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
-      margin-bottom: 1rem; /* push button area down if needed */
+      /* Increase vertical gap => more space between password & Log In */
+      gap: 1rem;
     }
-
-    /* If you want the button even lower, you can do margin-top on the button itself */
+    .portal-box label {
+      font-weight: 600;
+    }
+    /* Wider fields, left aligned */
     .portal-box input {
-      width: 100%;
+      width: 300px; /* increase from 100% => 300px */
+      text-align: left;
       padding: 0.5rem;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
 
-    /* The error message with a line space before it => margin-top: 1rem */
-    .error-message {
-      margin-top: 1rem; /* single line space */
-      color: red;
-      font-size: 0.875rem;
-      display: none;
-    }
-
-    .portal-image {
-      flex: 1;
-      min-width: 300px;
-      max-width: 500px;
-      border-radius: 8px;
-      object-fit: cover;
-    }
-
-    /* ========== Buttons: Standard .btn Style ========== */
     .btn {
       background-color: #0066cc;
       color: #fff;
@@ -204,11 +180,38 @@
       border-radius: 4px;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      align-self: center; /* center button horizontally in the form container */
-      margin-top: 1.5rem; /* push it ~25% lower from original */
+      align-self: center;
+      margin-top: 1.5rem; /* ~25% lower from original */
     }
     .btn:hover {
       background-color: #005bb5;
+    }
+
+    .portal-image {
+      flex: 1;
+      min-width: 300px;
+      max-width: 500px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    .error-message {
+      color: red;
+      font-size: 0.875rem;
+      margin-top: 1rem; /* single line space before the error */
+      display: none;
+      text-align: center;
+    }
+
+    /* ========== Projects Divider ========== */
+    .divider {
+      border-top: 1px solid #ccc;
+      margin: 2rem 0;
+    }
+    /* Additional class so it doesn't run into the portal image.
+       E.g., narrower width or offset. Adjust as needed. */
+    .portal-divider {
+      max-width: 400px;
+      margin-left: 0;
     }
 
     /* ========== About Section ========== */
@@ -233,7 +236,6 @@
       flex-wrap: wrap;
       gap: 1.5rem;
     }
-
     .team-member {
       width: 320px;
       background: linear-gradient(135deg, #e2e2e2, #f9f9f9);
@@ -303,15 +305,9 @@
       background-color: #ccc;
     }
 
-    .divider {
-      border-top: 1px solid #ccc;
-      margin: 2rem 0;
-    }
-
     h3 + .gallery {
       margin-top: 1rem;
     }
-
     .gallery {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -327,7 +323,7 @@
       border-radius: 5px;
     }
 
-    /* ========== Contact Section ========== */
+    /* ========== Contact Section: Remove "Your" in labels ========== */
     .contact-form {
       display: flex;
       flex-direction: column;
@@ -350,7 +346,7 @@
       margin-top: 0.5rem;
     }
 
-    /* ========== Footer: 33% Smaller & Smaller Font ========== */
+    /* ========== Footer: 25% Smaller, Font Size 10 ========== */
     footer {
       background-color: #333;
       color: white;
@@ -358,16 +354,18 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      padding: 0.66rem; /* ~33% smaller than 1rem */
-      font-size: 12px;  /* smaller to fit */
+      /* from 1rem -> 0.75rem is ~25% smaller */
+      padding: 0.75rem;
+      font-size: 10px; /* as requested */
     }
     footer .footer-content {
       flex: 1;
       text-align: center;
       margin-bottom: 0.5rem;
     }
+    /* Keep the footer logo the same size it was before (80px, etc.) */
     footer img {
-      height: 80px; /* same or reduce if you wish */
+      height: 80px;
       width: 80px;
       object-fit: contain;
     }
@@ -395,7 +393,7 @@
       .portal-container {
         flex-direction: column;
         align-items: flex-start;
-        min-height: auto; /* so mobile doesn't force a large blank space */
+        min-height: auto; /* so mobile doesn't force blank space */
       }
       .portal-box, .portal-image {
         max-width: 100%;
@@ -405,9 +403,10 @@
         width: 100%;
       }
 
+      /* For smaller devices, maybe keep the gallery 2×2 or 2×3, adjust if desired */
       .gallery {
         grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 150px;
+        grid-auto-rows: 150px; 
       }
     }
   </style>
@@ -426,11 +425,11 @@
   <!-- Navigation -->
   <nav>
     <ul>
-      <li><a href="#home" class="nav-link" data-target="home" onclick="goTop()">Home</a></li>
-      <li><a href="#about" class="nav-link" data-target="about" onclick="goTop()">About</a></li>
-      <li><a href="#team" class="nav-link" data-target="team" onclick="goTop()">Team</a></li>
-      <li><a href="#projects" class="nav-link" data-target="projects" onclick="goTop()">Projects</a></li>
-      <li><a href="#contact" class="nav-link" data-target="contact" onclick="goTop()">Contact</a></li>
+      <li><a href="#home" class="nav-link" data-target="home">Home</a></li>
+      <li><a href="#about" class="nav-link" data-target="about">About</a></li>
+      <li><a href="#team" class="nav-link" data-target="team">Team</a></li>
+      <li><a href="#projects" class="nav-link" data-target="projects">Projects</a></li>
+      <li><a href="#contact" class="nav-link" data-target="contact">Contact</a></li>
     </ul>
   </nav>
 
@@ -443,18 +442,16 @@
         <div class="portal-box">
           <h2>Investor Portal</h2>
           <form>
-            <label for="username">Username</label>
+            <label for="username">Name</label>
             <input type="text" id="username" name="username" required />
 
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required />
 
-            <!-- type="button" so it does NOT trigger default form submission/zoom -->
             <button class="btn" type="button" onclick="handleLogin()">
               Log In
             </button>
           </form>
-          <!-- Single line space before error message -->
           <p id="error-message" class="error-message"></p>
         </div>
 
@@ -465,6 +462,9 @@
           alt="Portal login illustration"
         />
       </div>
+
+      <!-- Low-opacity gray line (divider) below investor portal -->
+      <div class="portal-divider divider"></div>
     </section>
 
     <!-- About Section -->
@@ -624,30 +624,31 @@
         method="POST"
         enctype="text/plain"
       >
-        <label for="name">Your Name</label>
+        <!-- Remove "Your" in the labels -->
+        <label for="name">Name</label>
         <input
           type="text"
           id="name"
           name="name"
-          placeholder="Your Name"
+          placeholder="Name"
           required
         />
 
-        <label for="email">Your Email</label>
+        <label for="email">Email</label>
         <input
           type="email"
           id="email"
           name="email"
-          placeholder="Your Email"
+          placeholder="Email"
           required
         />
 
-        <label for="phone">Your Phone Number</label>
+        <label for="phone">Phone Number</label>
         <input
           type="tel"
           id="phone"
           name="phone"
-          placeholder="Your Phone Number"
+          placeholder="Phone Number"
           required
         />
 
@@ -664,7 +665,7 @@
     </section>
   </main>
 
-  <!-- Footer -->
+  <!-- Footer 25% Smaller, Font = 10px -->
   <footer>
     <div class="footer-content">
       <p>360 Central Ave, Suite 800, St Petersburg FL, 33701</p>
@@ -678,10 +679,6 @@
   </footer>
 
   <script>
-    function goTop() {
-      window.scrollTo({ top: 0 });
-    }
-
     // Navigation
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
@@ -689,8 +686,8 @@
         e.preventDefault();
         const targetId = link.dataset.target;
         showSection(targetId);
-        // Also scroll to top each time a user clicks a tab
-        goTop();
+        // Force top each time a user clicks a tab
+        window.scrollTo(0, 0);
         window.location.hash = targetId;
       });
     });
@@ -701,11 +698,12 @@
       document.getElementById(sectionId).classList.add('active');
     }
 
+    // On page load, if there's a hash, show that section + scroll top
     window.addEventListener('DOMContentLoaded', () => {
       const hash = window.location.hash.replace('#', '');
       if (hash) {
         showSection(hash);
-        goTop();
+        window.scrollTo(0, 0);
       }
     });
 
