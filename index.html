@@ -34,6 +34,8 @@
       flex-direction: column;
       min-height: 100vh;
       font-family: 'Open Sans', sans-serif;
+      /* Prevent horizontal scroll on all devices */
+      overflow-x: hidden;
     }
 
     a {
@@ -44,7 +46,7 @@
       text-decoration: underline;
     }
 
-    /* ========== Header (60% as tall; no change to logo/title size) ========== */
+    /* ========== Header (60% as tall; keep logo & title same size) ========== */
     header {
       background: linear-gradient(
         to bottom,
@@ -52,25 +54,26 @@
         rgba(0, 31, 77, 0.8) 80%
       );
       color: white;
-      /* from 1rem => 0.6rem is ~60% the original height */
+      /* 60% of the original ~1rem => 0.6rem */
       padding: 0.6rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      text-align: center; /* Center the content horizontally */
     }
 
-    /* Logo & Title remain same dimensions/font on desktop */
     header img {
       height: 150px;
       width: 150px;
       object-fit: contain;
       margin-right: 1rem;
+      display: inline-block; 
+      vertical-align: middle;
     }
+
     header h1 {
       font-size: 1.8rem;
       margin: 0;
-      text-align: center;
       font-weight: 600;
+      display: inline-block; 
+      vertical-align: middle; 
     }
 
     /* ========== Navigation ========== */
@@ -129,14 +132,14 @@
       width: 80%;
       max-width: 800px;
       margin: 0 auto; /* center horizontally */
-      overflow: hidden; /* prevent text from pushing the tile bigger */
+      overflow: hidden; 
       background: linear-gradient(135deg, #e2e2e2, #f9f9f9);
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem; /* internal spacing if needed */
+      padding: 1rem; 
     }
 
     .portal-left {
@@ -145,8 +148,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      position: relative;
       height: 100%;
+      position: relative;
     }
     .portal-left h2 {
       margin-bottom: 1rem;
@@ -170,10 +173,23 @@
       border-radius: 4px;
       width: 100%;
     }
+    /* Revert to old Log In button style => margin-top: 1.5rem; align-self: center */
     .portal-form .btn {
-      margin-top: 0.5rem;
       align-self: center;
+      margin-top: 1.5rem;
+      background-color: #0066cc;
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
     }
+    .portal-form .btn:hover {
+      background-color: #005bb5;
+    }
+
     .error-message {
       color: red;
       font-size: 0.875rem;
@@ -185,10 +201,10 @@
     .portal-right {
       width: 50%;
       height: 100%;
-      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
     }
     .portal-right img {
       width: 90%;
@@ -207,7 +223,6 @@
       justify-content: space-between;
       padding: 0.66rem;
       font-size: 12px;
-      /* Ensures no horizontal overflow on mobile */
       width: 100%;
       box-sizing: border-box;
     }
@@ -222,35 +237,30 @@
       object-fit: contain;
     }
 
-    /* ========== Mobile Overrides ========== */
+    /* ========== Media Queries (Mobile Only) ========== */
     @media (max-width: 768px) {
-      /* Ensure no horizontal scroll on mobile overall */
+      /* Hide horizontal runner, if any */
       html, body {
         overflow-x: hidden;
       }
 
-      /* Header scaling down, but keep same logo & no cut-off. 
-         Make text smaller to fit on one line. */
+      /* Slightly reduce header space & text if needed */
       header {
         padding: 0.4rem;
-        width: 100%;
       }
       header h1 {
-        font-size: 1.2rem; /* smaller so it doesn't break lines */
-        white-space: nowrap; /* keep text in one line if possible */
+        font-size: 1.2rem;
+        white-space: nowrap; /* keep text on one line */
       }
 
-      /* Hide the image portion entirely on mobile */
-      .portal-right img {
-        display: none;
-      }
+      /* Remove image from mobile version, keep only the left side */
       .portal-right {
-        display: none; /* remove the entire image wrapper on mobile */
+        display: none; 
       }
 
-      /* Let portal-left fill entire tile on mobile, remove aspect ratio if needed */
+      /* Let portal-left fill entire container on mobile */
       .portal-container {
-        aspect-ratio: auto;
+        aspect-ratio: auto; 
         width: 95%;
         flex-direction: column;
         padding: 1rem;
@@ -259,12 +269,11 @@
 
       .portal-left h2 {
         font-size: 1.2rem; 
-        margin-top: 0; /* remove negative margin so no overlap */
+        margin-top: 0; 
       }
     }
   </style>
 </head>
-
 <body>
   <!-- Header -->
   <header>
@@ -297,6 +306,7 @@
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required />
 
+            <!-- Old button style restored -->
             <button class="btn" type="button" onclick="handleLogin()">
               Log In
             </button>
