@@ -222,140 +222,6 @@
       background-color: #005bb5;
     }
 
-    /* ========== About Section ========== */
-    .about-section {
-      margin-bottom: 2rem;
-    }
-    .about-section h3 {
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
-    }
-
-    /* ========== Team Section ========== */
-    #team h2 {
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-    .team-container {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-    }
-    .team-member {
-      width: 320px;
-      background: linear-gradient(135deg, #e2e2e2, #f9f9f9);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1rem;
-      text-align: center;
-    }
-    .team-member img {
-      width: 280px;
-      height: 280px;
-      object-fit: cover;
-      border-radius: 12px;
-      background-color: #ccc;
-      margin-bottom: 1rem;
-    }
-    .team-member h3 {
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-    .team-member .title-block {
-      min-height: 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 0.75rem;
-    }
-    .team-member .contact-info {
-      font-size: 14px;
-      margin: 0.25rem 0;
-    }
-    .team-member .contact-info.email {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 95%;
-      margin: 0.25rem auto 0.5rem auto;
-    }
-    .team-member .contact-info.phone {
-      margin-bottom: 0.5rem;
-    }
-
-    /* ========== Projects Section & Gallery ========== */
-    .projects-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .projects-details {
-      flex: 1;
-      min-width: 250px;
-    }
-    .project-images {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-    .project-images img {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 5px;
-      background-color: #ccc;
-    }
-    .divider {
-      border-top: 1px solid #ccc;
-      margin: 2rem 0;
-    }
-    h3 + .gallery {
-      margin-top: 1rem;
-    }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: 200px;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .gallery img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      background-color: #ccc;
-      border-radius: 5px;
-    }
-
-    /* ========== Contact Section ========== */
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin-top: 1rem;
-    }
-    .contact-form label {
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-    .contact-form input,
-    .contact-form textarea {
-      padding: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-family: inherit;
-      width: 200%;
-    }
-    .contact-form button {
-      margin-top: 0.5rem;
-    }
-
     /* ========== Footer remains as is, 33% smaller & 12px ========== */
     footer {
       background-color: #333;
@@ -377,45 +243,6 @@
       width: 80px;
       object-fit: contain;
     }
-
-    /* ========== Media Queries ========== */
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 1.4rem;
-      }
-      .projects-container {
-        flex-direction: column;
-      }
-      .projects-details, .project-images {
-        max-width: 100%;
-      }
-      .contact-form input,
-      .contact-form textarea {
-        width: 100%;
-      }
-
-      /* On smaller screens, tile becomes flexible */
-      .portal-container {
-        width: 100%;
-        aspect-ratio: auto;
-        flex-direction: column;
-        padding: 1rem;
-      }
-      .portal-left, .portal-right {
-        width: 100%;
-        height: auto;
-      }
-      .portal-right img {
-        width: 80%; /* or 100%, but might not stay square on very narrow screens */
-        height: auto;
-        margin: 1rem auto 0;
-      }
-
-      .gallery {
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 150px;
-      }
-    }
   </style>
 </head>
 
@@ -429,20 +256,17 @@
     <h1>Lighthouse Development Partners</h1>
   </header>
 
-  <!-- Navigation -->
+  <!-- Navigation: Only HOME -->
   <nav>
     <ul>
       <li><a href="#home" class="nav-link" data-target="home" onclick="goTop()">Home</a></li>
-      <li><a href="#about" class="nav-link" data-target="about" onclick="goTop()">About</a></li>
-      <li><a href="#team" class="nav-link" data-target="team" onclick="goTop()">Team</a></li>
-      <li><a href="#projects" class="nav-link" data-target="projects" onclick="goTop()">Projects</a></li>
-      <li><a href="#contact" class="nav-link" data-target="contact" onclick="goTop()">Contact</a></li>
+      <!-- All other tabs removed -->
     </ul>
   </nav>
 
   <!-- Main Content -->
   <main>
-    <!-- Home Section: 16:9 Investor Portal -->
+    <!-- HOME (Active) -->
     <section id="home" class="active">
       <div class="portal-container">
         <!-- Left half: Portal Text & Form -->
@@ -471,209 +295,13 @@
         </div>
       </div>
     </section>
-
-    <!-- About Section -->
-    <section id="about" class="about-section">
-      <h2>About Us</h2>
-      <p>
-        Lighthouse Development Partners (LDP) was co-founded by childhood friends Harley Sisler and Sean Smith, who reconnected through their shared passion for real estate development. With distinct yet complementary backgrounds, they have positioned LDP as a formidable force in the real estate development sector.
-      </p>
-
-      <h3>Development Thesis</h3>
-      <p>
-        Our approach blends innovative design, economic feasibility, and a commitment to long-term impact. Drawing from our team's expertise in multifamily and hospitality development, finance, and market analysis, we focus on creating projects that are not only financially viable but also contribute positively to communities. We leverage cutting-edge technologies and sustainable practices, ensuring our developments thrive across market cycles.
-      </p>
-
-      <h3>Investment Criteria</h3>
-      <p>
-        At LDP, we focus on projects with strong fundamentals, growth potential, and alignment with our mission of sustainable development. Our expertise in navigating complex financing structures, particularly in the Low Income Housing Tax Credit (LIHTC) space, enables us to bring forward multifamily and affordable housing projects that meet market needs and provide strong returns for our stakeholders.
-      </p>
-    </section>
-
-    <!-- Team Section -->
-    <section id="team">
-      <h2>Meet Our Team</h2>
-      <div class="team-container">
-        <!-- Sean Smith -->
-        <div class="team-member">
-          <img
-            src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/Sean.jpg"
-            alt="Portrait of Sean Smith"
-          />
-          <h3>Sean Smith</h3>
-          <div class="title-block">
-            <p>Managing Partner, Affordable Development</p>
-          </div>
-          <a
-            class="contact-info email"
-            href="mailto:ssmith@lighthousedevelopment.com"
-          >
-            ssmith@lighthousedevelopment.com
-          </a>
-          <p class="contact-info phone">813-952-0984</p>
-        </div>
-
-        <!-- Harley Sisler -->
-        <div class="team-member">
-          <img
-            src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/harley.jpg"
-            alt="Portrait of Harley Sisler"
-          />
-          <h3>Harley Sisler</h3>
-          <div class="title-block">
-            <p>Managing Partner, Hospitality & Market Rate</p>
-          </div>
-          <a
-            class="contact-info email"
-            href="mailto:hsisler@lighthousedevelopment.com"
-          >
-            hsisler@lighthousedevelopment.com
-          </a>
-          <p class="contact-info phone">336-413-3410</p>
-        </div>
-
-        <!-- Maxfield Branson -->
-        <div class="team-member">
-          <img
-            src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/Maxfield.jpg"
-            alt="Portrait of Maxfield Branson"
-          />
-          <h3>Maxfield Branson</h3>
-          <div class="title-block">
-            <p>Operations</p>
-          </div>
-          <a
-            class="contact-info email"
-            href="mailto:mbranson@lighthousedevelopment.com"
-          >
-            mbranson@lighthousedevelopment.com
-          </a>
-          <p class="contact-info phone">646-464-4218</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-      <h2>Our Projects</h2>
-      <div class="projects-container">
-        <div class="projects-details">
-          <h3>Reserve at Eastwood</h3>
-          <p>Location: Fort Myers, FL</p>
-          <p>Type: LIHTC, Affordable Housing, Multifamily</p>
-          <p>Start Date: 2024</p>
-        </div>
-        <div class="project-images">
-          <img
-            src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
-            alt="Project image 1 for Reserve at Eastwood"
-          />
-          <img
-            src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
-            alt="Project image 2 for Reserve at Eastwood"
-          />
-          <img
-            src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
-            alt="Project image 3 for Reserve at Eastwood"
-          />
-        </div>
-      </div>
-      <div class="divider"></div>
-      <h3>Images from Our Completed Projects</h3>
-      <div class="gallery">
-        <img
-          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
-          alt="Completed Project 1"
-        />
-        <img
-          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
-          alt="Completed Project 2"
-        />
-        <img
-          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
-          alt="Completed Project 3"
-        />
-        <img
-          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
-          alt="Completed Project 4"
-        />
-        <img
-          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
-          alt="Completed Project 5"
-        />
-        <img
-          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
-          alt="Completed Project 6"
-        />
-        <img
-          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
-          alt="Completed Project 7"
-        />
-        <img
-          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
-          alt="Completed Project 8"
-        />
-        <img
-          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
-          alt="Completed Project 9"
-        />
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-      <h2>Contact Us</h2>
-      <form
-        class="contact-form"
-        action="mailto:mbranson@lighthousedevelopment.com"
-        method="POST"
-        enctype="text/plain"
-      >
-        <label for="name">Your Name</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Your Name"
-          required
-        />
-
-        <label for="email">Your Email</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Your Email"
-          required
-        />
-
-        <label for="phone">Your Phone Number</label>
-        <input
-          type="tel"
-          id="phone"
-          name="phone"
-          placeholder="Your Phone Number"
-          required
-        />
-
-        <label for="message">Message</label>
-        <textarea
-          id="message"
-          name="message"
-          rows="5"
-          placeholder="Write your message here..."
-        ></textarea>
-
-        <button class="btn" type="submit">Send</button>
-      </form>
-    </section>
   </main>
 
   <!-- Footer -->
   <footer>
     <div class="footer-content">
       <p>360 Central Ave, Suite 800, St Petersburg FL, 33701</p>
-      <p>(123) 456-7890</p>
+      <!-- Removed phone number line -->
       <p>&copy; 2025 Lighthouse Development Partners</p>
     </div>
     <img 
@@ -687,7 +315,7 @@
       window.scrollTo({ top: 0 });
     }
 
-    // Navigation
+    // Only HOME section now
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
       link.addEventListener('click', (e) => {
