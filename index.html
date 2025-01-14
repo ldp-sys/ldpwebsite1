@@ -26,7 +26,7 @@
       height: 100%;
       width: 100%;
       color: #333;
-      overscroll-behavior: none; /* prevents bounce on modern browsers */
+      overscroll-behavior: none; /* prevents bounce on mobile */
     }
 
     body {
@@ -44,8 +44,7 @@
       text-decoration: underline;
     }
 
-    /* ========== Header Adjustments ========== */
-    /* Smaller by ~25%, logo 50% bigger than before */
+    /* ========== Header (60% as tall; no change to logo/title size) ========== */
     header {
       background: linear-gradient(
         to bottom,
@@ -53,22 +52,22 @@
         rgba(0, 31, 77, 0.8) 80%
       );
       color: white;
-      padding: 0.75rem; /* was 1rem, ~25% smaller */
+      /* from 1rem => 0.6rem is ~60% the original height */
+      padding: 0.6rem;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    /* If previously the logo was 100px, increase by 50% => 150px */
+    /* Logo & Title remain same dimensions/font */
     header img {
       height: 150px;
       width: 150px;
       object-fit: contain;
-      margin-right: 0.5rem; /* slightly closer to the text */
+      margin-right: 1rem;
     }
-
     header h1 {
-      font-size: 1.8rem; /* kept as is or slightly reduce if needed */
+      font-size: 1.8rem;
       margin: 0;
       text-align: center;
       font-weight: 600;
@@ -113,85 +112,99 @@
     }
 
     h2, h3 {
-      color: #001f4d; /* Navy headings */
+      color: #001f4d;
+      font-weight: 600;
     }
     h2 {
       margin-bottom: 1rem;
-      font-weight: 600;
     }
 
-    /* ========== Investor Portal (Home) ========== */
+    /* ========== Investor Portal (16:9 tile, half square image) ========== */
     #home {
       padding-top: 3rem;
     }
 
-    /*
-      Provide a min-height so the tile won't "jump"
-      when the error message appears. E.g., 450px.
-    */
     .portal-container {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      /* Force a 16:9 ratio and wide enough to show half form / half image */
+      aspect-ratio: 16 / 9;
+      width: 80%;
+      max-width: 800px;
+      margin: 0 auto; /* center horizontally */
+      overflow: hidden; /* prevent text from pushing the tile bigger */
       background: linear-gradient(135deg, #e2e2e2, #f9f9f9);
       border-radius: 8px;
-      padding: 1.5rem;
-      min-height: 450px; /* ensures enough space for error msg */
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem; /* internal spacing if needed */
     }
 
-    .portal-box {
-      flex: 1;
-      min-width: 300px;
-      max-width: 400px;
+    /* Left half for the text/form */
+    .portal-left {
+      width: 50%;
       display: flex;
       flex-direction: column;
-      align-items: center; /* center text horizontally */
-      /* Title higher by 25% => negative margin-top, or smaller top margin. */
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 100%; /* fill tile height */
     }
-    /* Shift the title up, ~25% from original */
-    .portal-box h2 {
+
+    .portal-left h2 {
       margin-bottom: 1rem;
-      margin-top: -0.5rem; /* shift up slightly */
       font-size: 1.5rem;
-      font-weight: 600;
       text-align: center;
+      margin-top: -0.5rem; /* shift up ~25% from original */
     }
 
-    /* Now place button lower => add margin-top in the form */
-    .portal-box form {
-      width: 100%;
-      max-width: 280px;
+    .portal-form {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
-      margin-bottom: 1rem; /* push button area down if needed */
+      gap: 1rem; /* space between password & log in button */
+      width: 220px; /* narrower or tweak as you prefer */
+      text-align: left;
     }
 
-    /* If you want the button even lower, you can do margin-top on the button itself */
-    .portal-box input {
-      width: 100%;
+    .portal-form label {
+      font-weight: 600;
+    }
+    .portal-form input {
       padding: 0.5rem;
       border: 1px solid #ccc;
       border-radius: 4px;
+      width: 100%;
     }
 
-    /* The error message with a line space before it => margin-top: 1rem */
+    .portal-form .btn {
+      margin-top: 0.5rem; /* push the button lower if you like */
+      align-self: center;
+    }
+
     .error-message {
-      margin-top: 1rem; /* single line space */
       color: red;
       font-size: 0.875rem;
+      margin-top: 1rem; /* single line space */
       display: none;
+      text-align: center;
     }
 
-    .portal-image {
-      flex: 1;
-      min-width: 300px;
-      max-width: 500px;
-      border-radius: 8px;
+    /* Right half: image as a large square */
+    .portal-right {
+      width: 50%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    /* the image itself forced to a square that nearly fills half the tile */
+    .portal-right img {
+      width: 90%;
+      height: 90%;
       object-fit: cover;
+      border-radius: 8px;
+      /* so it's square => whichever dimension is smaller is the limiting factor */
     }
 
     /* ========== Buttons: Standard .btn Style ========== */
@@ -204,8 +217,6 @@
       border-radius: 4px;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      align-self: center; /* center button horizontally in the form container */
-      margin-top: 1.5rem; /* push it ~25% lower from original */
     }
     .btn:hover {
       background-color: #005bb5;
@@ -219,7 +230,6 @@
       margin-top: 2rem;
       margin-bottom: 1rem;
       font-size: 1.2rem;
-      font-weight: 600;
     }
 
     /* ========== Team Section ========== */
@@ -233,7 +243,6 @@
       flex-wrap: wrap;
       gap: 1.5rem;
     }
-
     .team-member {
       width: 320px;
       background: linear-gradient(135deg, #e2e2e2, #f9f9f9);
@@ -249,7 +258,7 @@
       width: 280px;
       height: 280px;
       object-fit: cover;
-      border-radius: 12px; 
+      border-radius: 12px;
       background-color: #ccc;
       margin-bottom: 1rem;
     }
@@ -302,20 +311,17 @@
       border-radius: 5px;
       background-color: #ccc;
     }
-
     .divider {
       border-top: 1px solid #ccc;
       margin: 2rem 0;
     }
-
     h3 + .gallery {
       margin-top: 1rem;
     }
-
     .gallery {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: 200px; /* each row 200px tall */
+      grid-auto-rows: 200px;
       gap: 1rem;
       margin-bottom: 1.5rem;
     }
@@ -350,7 +356,7 @@
       margin-top: 0.5rem;
     }
 
-    /* ========== Footer: 33% Smaller & Smaller Font ========== */
+    /* ========== Footer remains as is, 33% smaller & 12px ========== */
     footer {
       background-color: #333;
       color: white;
@@ -358,8 +364,8 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      padding: 0.66rem; /* ~33% smaller than 1rem */
-      font-size: 12px;  /* smaller to fit */
+      padding: 0.66rem;
+      font-size: 12px;
     }
     footer .footer-content {
       flex: 1;
@@ -367,7 +373,7 @@
       margin-bottom: 0.5rem;
     }
     footer img {
-      height: 80px; /* same or reduce if you wish */
+      height: 80px;
       width: 80px;
       object-fit: contain;
     }
@@ -388,21 +394,21 @@
         width: 100%;
       }
 
-      /* Portal stacks on mobile */
-      #home {
-        padding-top: 1.5rem;
-      }
+      /* On smaller screens, tile becomes flexible */
       .portal-container {
-        flex-direction: column;
-        align-items: flex-start;
-        min-height: auto; /* so mobile doesn't force a large blank space */
-      }
-      .portal-box, .portal-image {
-        max-width: 100%;
-      }
-      .portal-image {
-        margin-top: 1rem;
         width: 100%;
+        aspect-ratio: auto;
+        flex-direction: column;
+        padding: 1rem;
+      }
+      .portal-left, .portal-right {
+        width: 100%;
+        height: auto;
+      }
+      .portal-right img {
+        width: 80%; /* or 100%, but might not stay square on very narrow screens */
+        height: auto;
+        margin: 1rem auto 0;
       }
 
       .gallery {
@@ -436,34 +442,33 @@
 
   <!-- Main Content -->
   <main>
-    <!-- Home Section: Investor Portal -->
+    <!-- Home Section: 16:9 Investor Portal -->
     <section id="home" class="active">
       <div class="portal-container">
-        <!-- Left side: login box -->
-        <div class="portal-box">
+        <!-- Left half: Portal Text & Form -->
+        <div class="portal-left">
           <h2>Investor Portal</h2>
-          <form>
+          <form class="portal-form">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" required />
 
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required />
 
-            <!-- type="button" so it does NOT trigger default form submission/zoom -->
             <button class="btn" type="button" onclick="handleLogin()">
               Log In
             </button>
           </form>
-          <!-- Single line space before error message -->
           <p id="error-message" class="error-message"></p>
         </div>
 
-        <!-- Right side: image -->
-        <img
-          class="portal-image"
-          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
-          alt="Portal login illustration"
-        />
+        <!-- Right half: Larger Square Image -->
+        <div class="portal-right">
+          <img
+            src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
+            alt="Portal login illustration"
+          />
+        </div>
       </div>
     </section>
 
@@ -673,7 +678,7 @@
     </div>
     <img 
       src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/ldplogo.png" 
-      alt="Lighthouse Development Partners small logo" 
+      alt="Lighthouse Development Partners small logo"
     />
   </footer>
 
