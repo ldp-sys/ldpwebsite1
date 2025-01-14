@@ -26,7 +26,7 @@
       height: 100%;
       width: 100%;
       color: #333;
-      overscroll-behavior: none; /* prevents bounce on mobile */
+      overscroll-behavior: none;
     }
 
     body {
@@ -44,7 +44,7 @@
       text-decoration: underline;
     }
 
-    /* ========== Header: 25% smaller ========== */
+    /* ========== Header: 25% smaller but logo 50% bigger ========== */
     header {
       background: linear-gradient(
         to bottom,
@@ -52,22 +52,25 @@
         rgba(0, 31, 77, 0.8) 80%
       );
       color: white;
-      padding: 0.75rem; /* was ~1rem, 25% smaller */
+      padding: 0.75rem; /* was ~1rem, ~25% smaller overall */
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    /* Logo slightly smaller and closer to the title */
+    /* Logo 50% bigger than it was:
+       If previously it was 50px -> now 75px
+       If previously it was 60px -> now 90px, etc.
+       We'll assume it was ~50px, so let's do 75px. */
     header img {
-      height: 75px; /* was 100px */
+      height: 75px;
       width: 75px;
       object-fit: contain;
-      margin-right: 0.5rem; /* closer to the title */
+      margin-right: 0.5rem; /* keep it closer to the title */
     }
 
     header h1 {
-      font-size: 1.6rem; /* slightly reduced from 1.8rem */
+      font-size: 1.6rem; /* slightly smaller than 1.8rem */
       margin: 0;
       text-align: center;
       font-weight: 600;
@@ -94,10 +97,10 @@
     }
     nav li a:hover,
     nav li a:focus {
-      background-color: #002a5f; /* less vibrant navy */
+      background-color: #002a5f;
     }
 
-    /* ========== Main & Section Layout ========== */
+    /* ========== Main Layout & Section Toggle ========== */
     main {
       flex-grow: 1;
       max-width: 1200px;
@@ -119,95 +122,99 @@
       margin-bottom: 1rem;
     }
 
-    /* ========== Investor Portal (Fixed dimensions) ========== */
+    /* ========== Investor Portal (16:9 aspect ratio) ========== */
     #home {
-      padding-top: 3rem;
-    }
-    .portal-container {
+      padding-top: 2rem; /* can adjust if needed */
       display: flex;
-      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* The tile has a 16:9 aspect ratio and a max width.
+       Aspect ratio ensures the tile won't jump in size
+       if the content changes, as long as we keep overflow hidden. */
+    .portal-tile {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      width: 80vw;
+      max-width: 800px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #e2e2e2, #f9f9f9);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      overflow: hidden; /* so text doesn't push it bigger */
+      display: flex;
+      flex-direction: row; /* left area for form, right area for image */
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-      background: linear-gradient(135deg, #e2e2e2, #f9f9f9);
-      border-radius: 8px;
-      /* fixed tile dims so error doesn't resize it */
-      width: 600px;
-      height: 350px;
-      margin: 0 auto; /* center horizontally if you prefer */
-      padding: 1rem;  /* smaller internal padding */
+      padding: 1rem; /* internal padding */
     }
 
-    .portal-box {
+    /* Left side: form & error text */
+    .portal-left {
       display: flex;
       flex-direction: column;
-      justify-content: space-between; /* space out title, form, and button */
-      width: 40%; /* about 40% of the tile's width */
+      justify-content: space-between; /* space out heading, form, error text */
+      width: 45%; /* ~45% left, 55% right for image */
+      height: 100%;
+      position: relative; 
     }
 
-    /* Move the title 25% higher => negative margin or smaller spacing */
-    .portal-box h2 {
-      margin-top: -0.75rem; /* ~25% higher than default */
+    .portal-left h2 {
+      margin-top: 0; /* push heading higher by removing top margin */
       margin-bottom: 0.5rem;
       text-align: center;
       font-size: 1.4rem;
     }
 
-    /* Align fields to left, push button 25% lower => bigger margin-top */
-    .portal-box form {
+    .portal-form {
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+      /* For consistent form sizing */
+      width: 100%;
     }
-    .portal-box label {
+
+    .portal-form label {
       font-weight: 600;
     }
-    .portal-box input {
+
+    .portal-form input {
+      width: 100%;
       padding: 0.5rem;
       border: 1px solid #ccc;
       border-radius: 4px;
+      font-size: 0.95rem; /* smaller to fit comfortably */
     }
 
-    /* Place button lower => margin-top: 1.5rem for a 25% shift */
-    .portal-box button.btn {
-      margin-top: 1.5rem;
+    .portal-form .btn {
+      margin-top: 0.75rem;
       width: 100px;
       align-self: center;
     }
 
-    .portal-image {
-      width: 55%; /* ~ remaining space */
-      height: 100%;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
     /* Single line space before the error message */
     .error-message {
-      margin-top: 1rem;
       color: red;
       font-size: 0.875rem;
       text-align: center;
+      margin-top: 0.75rem;
       display: none;
     }
 
-    /* ========== Buttons: Standard .btn Style ========== */
-    .btn {
-      background-color: #0066cc;
-      color: #fff;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+    /* Right side: image */
+    .portal-right {
+      width: 55%;
+      height: 100%;
+      position: relative;
     }
-    .btn:hover {
-      background-color: #005bb5;
+    .portal-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
     }
 
-    /* ========== About Section ========== */
+    /* ========== About / Team / Projects / Contact Sections ========== */
     .about-section {
       margin-bottom: 2rem;
     }
@@ -217,7 +224,6 @@
       font-size: 1.2rem;
     }
 
-    /* ========== Team Section ========== */
     #team h2 {
       text-align: center;
       margin-bottom: 1.5rem;
@@ -243,7 +249,7 @@
       width: 280px;
       height: 280px;
       object-fit: cover;
-      border-radius: 12px; 
+      border-radius: 12px;
       background-color: #ccc;
       margin-bottom: 1rem;
     }
@@ -272,7 +278,6 @@
       margin-bottom: 0.5rem;
     }
 
-    /* ========== Projects Section & Gallery ========== */
     .projects-container {
       display: flex;
       flex-wrap: wrap;
@@ -354,17 +359,17 @@
     footer .footer-content {
       flex: 1;
       text-align: center;
-      margin-bottom: 0.25rem; /* smaller margin */
+      margin-bottom: 0.25rem;
     }
+    /* Logo in the footer remains smaller than in header if you prefer */
     footer img {
-      height: 50px; /* reduced from 80px */
+      height: 50px;
       width: 50px;
       object-fit: contain;
     }
 
     /* ========== Media Queries ========== */
     @media (max-width: 768px) {
-      /* Even smaller header for mobile if desired */
       header {
         padding: 0.5rem;
       }
@@ -374,6 +379,29 @@
       }
       header h1 {
         font-size: 1.4rem;
+      }
+
+      /* Portal tile: reduce to 100% width, keep aspect ratio if possible 
+         On older iOS, aspect-ratio might not be fully supported, so fallback */
+      .portal-tile {
+        width: 100%;
+        max-width: 600px;
+      }
+
+      /* Possibly adjust height auto if needed */
+      .portal-tile {
+        aspect-ratio: auto;
+        height: auto;
+        flex-direction: column;
+      }
+      .portal-left, .portal-right {
+        width: 100%;
+        height: auto;
+      }
+      .portal-right img {
+        border-radius: 8px;
+        width: 100%;
+        height: 280px; /* arbitrary smaller for mobile */
       }
 
       .projects-container {
@@ -387,25 +415,6 @@
         width: 100%;
       }
 
-      #home {
-        padding-top: 1rem;
-      }
-      .portal-container {
-        width: 100%;
-        height: auto;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .portal-box {
-        width: 100%;
-      }
-      .portal-image {
-        margin-top: 1rem;
-        width: 100%;
-        height: 300px; /* or auto, as desired */
-      }
-
-      /* 2 columns in gallery on mobile */
       .gallery {
         grid-template-columns: repeat(2, 1fr);
         grid-auto-rows: 150px;
@@ -413,7 +422,6 @@
     }
   </style>
 </head>
-
 <body>
   <!-- Header -->
   <header>
@@ -427,42 +435,49 @@
   <!-- Navigation -->
   <nav>
     <ul>
-      <li><a href="#home" class="nav-link" data-target="home" onclick="scrollTopOnTab()">Home</a></li>
-      <li><a href="#about" class="nav-link" data-target="about" onclick="scrollTopOnTab()">About</a></li>
-      <li><a href="#team" class="nav-link" data-target="team" onclick="scrollTopOnTab()">Team</a></li>
-      <li><a href="#projects" class="nav-link" data-target="projects" onclick="scrollTopOnTab()">Projects</a></li>
-      <li><a href="#contact" class="nav-link" data-target="contact" onclick="scrollTopOnTab()">Contact</a></li>
+      <li><a href="#home" class="nav-link" data-target="home" onclick="scrollToTop()">Home</a></li>
+      <li><a href="#about" class="nav-link" data-target="about" onclick="scrollToTop()">About</a></li>
+      <li><a href="#team" class="nav-link" data-target="team" onclick="scrollToTop()">Team</a></li>
+      <li><a href="#projects" class="nav-link" data-target="projects" onclick="scrollToTop()">Projects</a></li>
+      <li><a href="#contact" class="nav-link" data-target="contact" onclick="scrollToTop()">Contact</a></li>
     </ul>
   </nav>
 
   <!-- Main Content -->
   <main>
-    <!-- Home Section: Investor Portal -->
+    <!-- Home Section: 16:9 Investor Portal -->
     <section id="home" class="active">
-      <div class="portal-container">
-        <div class="portal-box">
+      <div class="portal-tile">
+        <!-- Left side -->
+        <div class="portal-left">
           <h2>Investor Portal</h2>
-          <form>
+
+          <!-- Form fields -->
+          <form class="portal-form">
             <label for="username">Username</label>
-            <input type="text" id="username" name="username" required />
+            <input type="text" id="username" required />
 
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" required />
+            <input type="password" id="password" required />
 
             <button class="btn" type="button" onclick="showErrorMessage()">
               Log In
             </button>
           </form>
-          <!-- Single line space before error message -->
+
+          <!-- Error message inside the tile -->
           <p id="error-message" class="error-message">
             Investor account not found, please reach out to your contact at Lighthouse Development Partners.
           </p>
         </div>
-        <img
-          src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
-          alt="Portal login illustration"
-          class="portal-image"
-        />
+
+        <!-- Right side: image -->
+        <div class="portal-right">
+          <img
+            src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
+            alt="Portal login illustration"
+          />
+        </div>
       </div>
     </section>
 
@@ -558,17 +573,18 @@
           <p>Start Date: 2024</p>
         </div>
         <div class="project-images">
+          <!-- Replace these placeholders with actual images -->
           <img
             src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
-            alt="Project image 1 for Reserve at Eastwood"
+            alt="Project 1 for Reserve at Eastwood"
           />
           <img
             src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
-            alt="Project image 2 for Reserve at Eastwood"
+            alt="Project 2 for Reserve at Eastwood"
           />
           <img
             src="https://raw.githubusercontent.com/ldp-sys/ldpwebsite1/main/investorportalstock.jpg"
-            alt="Project image 3 for Reserve at Eastwood"
+            alt="Project 3 for Reserve at Eastwood"
           />
         </div>
       </div>
@@ -674,12 +690,11 @@
   </footer>
 
   <script>
-    // Scroll to top on tab click, then show the requested section
-    function scrollTopOnTab() {
-      window.scrollTo(0, 0);
+    // Scroll to top and navigate
+    function scrollToTop() {
+      window.scrollTo({ top: 0 });
     }
 
-    // Navigation
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
       link.addEventListener('click', (e) => {
@@ -696,21 +711,22 @@
       document.getElementById(sectionId).classList.add('active');
     }
 
+    // On page load, check if there's a hash & show that section
     window.addEventListener('DOMContentLoaded', () => {
       const hash = window.location.hash.replace('#', '');
       if (hash) {
         showSection(hash);
-        scrollTopOnTab();
+        scrollToTop();
       }
     });
 
-    // Show Error Message in Investor Portal
+    // Show investor portal error message
     function showErrorMessage() {
       const errorMsg = document.getElementById('error-message');
       errorMsg.style.display = 'block';
     }
 
-    // Handle Contact Form (front-end only)
+    // Contact Form Handler
     function submitContactForm(event) {
       event.preventDefault();
       const nameValue = document.getElementById('name').value;
@@ -718,6 +734,7 @@
       const phoneValue = document.getElementById('phone').value;
       const messageValue = document.getElementById('message').value;
 
+      // Front-end log
       console.log('Contact Form Submission:', {
         name: nameValue,
         email: emailValue,
@@ -725,9 +742,12 @@
         message: messageValue
       });
 
+      // Show success message to user
       const responseEl = document.getElementById('contact-response');
       responseEl.innerText = 'Thank you for contacting us! We have received your message.';
       responseEl.style.display = 'block';
+
+      // Clear the form
       event.target.reset();
     }
   </script>
